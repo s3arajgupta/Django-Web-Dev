@@ -5,7 +5,8 @@ from django.utils import timezone
 
 # Create your views here.
 def home(request):
-    return render(request, 'blogs/home.html')
+    blogs = Blog.objects
+    return render(request, 'blogs/home.html',{'blogs':blogs})
 
 @login_required
 def create(request):
@@ -27,3 +28,19 @@ def create(request):
 def detail(request, blog_id):
     blog = get_object_or_404(Blog, pk=blog_id)
     return render(request, 'blogs/detail.html',{'blog':blog})
+
+@login_required
+def edit(request, blog_id):
+    if request.method == "POST":
+        blog = get_object_or_404(Blog, pk=blog_id)
+        blog.title = request.POST['title']
+        blog.body = request.POST['body']
+        blog.url = request.POST['url']
+        blog.image = request.FILES['image']
+        blog.pub_date = timezone.datetime.now()
+        blog.save()
+        return redirect('/blogs/' + str(blog.id))
+
+    else :
+        return render(request, 'blogs/<int:blog_id>/edit.html',{'error':'Title and Body are required to edit.'})
+    return render(request, 'blogs/edit.html')

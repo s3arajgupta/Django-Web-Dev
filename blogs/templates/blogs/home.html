@@ -2,6 +2,18 @@
 
 {% block content %}
 
-Home!
+{% for blog in blogs.all %}
+
+<div class="row pt-3">
+  <div class="col-2">
+    <img src="{{ blog.image.url }}" class="img-fluid" />
+  </div>
+  <div class="col-6">
+    <h1>{{ blog.title }}</h1>
+    <p>{{ blog.summary }}</p>
+  </div>
+</div>
+
+{% endfor %}
 
 {% endblock %}
