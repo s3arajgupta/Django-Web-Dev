@@ -8,7 +8,7 @@ def home(request):
     blogs = Blog.objects
     return render(request, 'blogs/home.html',{'blogs':blogs})
 
-@login_required
+@login_required(login_url="/accounts/signup")
 def create(request):
     if request.method == "POST":
         if request.POST['title'] and request.POST['body']:
@@ -29,7 +29,7 @@ def detail(request, blog_id):
     blog = get_object_or_404(Blog, pk=blog_id)
     return render(request, 'blogs/detail.html',{'blog':blog})
 
-@login_required
+@login_required(login_url="/accounts/signup")
 def edit(request, blog_id):
     if request.method == "POST":
         blog = get_object_or_404(Blog, pk=blog_id)
