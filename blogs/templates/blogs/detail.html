@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-8">
+    <a href="{{ blog.url }}"><h1>{{ blog.title }}</h1></a>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-8">
+    <img src="{{ blog.image.url }}" class="img-fluid" />
+  </div>
+</div>
+
+<div class="row pt-2">
+  <div class="col-10 text-right">
+    <h4><span class="oi oi-clock"></span> {{ blog.pub_date_pretty }}</h4>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-10">
+    <p>{{ blog.body }}</p>
+  </div>
+</div>
+
+{% endblock %}

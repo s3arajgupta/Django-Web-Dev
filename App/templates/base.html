@@ -1,18 +1,17 @@
 <!doctype html>
 <html lang="en">
 <head>
-   {% load static %}
+<!--   {% load staticfiles % -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
 
 
-  <title>Nick Walter</title>
+  <title>Heisenberg Notes</title>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
 </head>
 
 <body>
@@ -21,7 +20,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
       <a class="navbar-brand" href="">
-      <imp scr="{% static 'logo.png' %}" alt="Logo" class="d-inline-block alighn-top" />
+      <imp scr="logo.png" alt="Logo" class="d-inline-block alighn-top" />
       Notes
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,6 +29,7 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ml-auto">
           {% if user.is_authenticated %}
+          <a class="nav-item nav-link" href="{% url 'create' %}">Create</a>
           <a class="nav-item nav-link" href="javascript:{document.getElementById('logout').submit()}">Logout</a>
           <form id="logout" method="POST" action="{% url 'logout' %}">
             {% csrf_token %}

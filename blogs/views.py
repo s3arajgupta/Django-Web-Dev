@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Blog
 from django.utils import timezone
@@ -18,8 +18,12 @@ def create(request):
             blog.image = request.FILES['image']
             blog.pub_date = timezone.datetime.now()
             blog.save()
-            return redirect('home')
+            return redirect('/blogs/' + str(blog.id))
 
         else :
             return render(request, 'blogs/create.html',{'error':'Title and Body are required to create.'})
     return render(request, 'blogs/create.html')
+
+def detail(request, blog_id):
+    blog = get_object_or_404(Blog, pk=blog_id)
+    return render(request, 'blogs/detail.html',{'blog':blog})
